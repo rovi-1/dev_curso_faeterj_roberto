@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Curso;
 use App\Aula;
+use App\Modulo;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
@@ -35,19 +36,43 @@ class CursoController extends Controller
         return view('curso', compact('curso', 'aula'));
     }
     public function cadastro(){
-        $professores = $this->professores();
+        $professores = $this->_professores();
         return view('cad_cursos', compact('professores'));
     }
-
+    private function _professores() {
+        return User::where('grupo','=', 'professor-admin')
+        ->orwhere('grupo','=', 'professor')
+        ->get();
+    }   
     public function salvar_curso(Request $request) {
          Curso::create($request->all());
          $professores = $this->_professores();
          return view('cad_cursos', compact('professores'));
     }
-
-    private function _professores() {
-        return User::where('grupo','=', 'professor-admin')
-        ->orwhere('grupo','=', 'professor')
-        ->get();
+    private function _cursos() {
+        return Curso::get();
     }
+    
+    private function _modulos() {
+        return Modulo::get();
+    }
+
+    public function cadastro_modulos(){
+        $cursos = $this->_cursos();
+        return view('cad_modulos', compact('cursos'));
+    }
+    public function salvar_modulo(Request $request) {
+        Modulo::create($request->all());
+        return redirect('/cadastro/modulos')->with('success', 'Seu modulo foi criado com sucesso.');
+   }
+    public function cadastro_aulas(){
+        $modulos = $this->_modulos();
+        return view('cad_aulas', compact('modulos'));
+    }
+    public function salvar_aula(Request $request) {
+        Aula::create($request->all());
+        return redirect('/cadastro/aulas')->with('success', 'Sua aula foi criada com sucesso.');
+    }
+
 }
+

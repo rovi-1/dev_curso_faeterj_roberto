@@ -23,7 +23,7 @@
         @foreach($cursos as $curso)
 
             <div class="card">
-                <a href="/curso/{{ $curso->id }}"><img class="card_image" src="{{ URL::asset('img/' . $curso->imagem) }}" alt=""></a>
+                <a href="/curso/{{ $curso->id }}"><img class="card_image" src="{{ URL::asset($curso->imagem) }}" alt=""></a>
                     <div class="card_content">
                         <h1 class="title_card"> {{ $curso->nome }} </h1>
                             <a>{{ $curso->descricao }}
@@ -31,14 +31,17 @@
                     </div>
                     <div class="card_info">
                         R$ {{ $curso->valor }}
-                        <a href="/curso/{{ $curso->id }}" style="background-color: white; padding: 6px;">Acessar</a>
+                        <a href="/curso/{{ $curso->id }}" class="form-control col-md-6"style="text-align: center;background-color: white; padding: 6px;">Acessar</a>
                     </div>
             </div>
 
-        @endforeach
+        @endforeach 
+        </div>
+       
+    </div>
+    <div class="container" style="margin-top: 20px;left:-5">
         {!! $cursos->links() !!}
         </div>
-    </div>
   </body>
 @endsection('conteudo')
 @include('layouts.partials.menu')

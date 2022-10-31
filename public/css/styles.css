@@ -16,7 +16,6 @@ html,body {
   width: 100%;
   height: 100% !important;
 }
-
 ul,
 li {
   list-style: none;
@@ -36,7 +35,11 @@ header {
   align-items: center;
   font-size: 16px;
 }
-
+.navbar-collapse{
+  position: absolute;
+  left: 550px;
+  width: 800px;
+}
 .menu {
   display: flex;
   align-items: center;
@@ -44,15 +47,13 @@ header {
 
 .menu li {
   margin-right: 40px;
+  
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
 }
 
-.menu li:hover {
-  opacity: 0.6;
-}
 
 .isActive {
   background-color: #00a9d4;
@@ -64,19 +65,23 @@ header {
 }
 
 .menu a:hover {
-  opacity: 0.6;
+  opacity: 1;
 }
 
 .profile {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 350px;
   color: #fff;
+  position: absolute;
+  left: 1400px;
 }
 
 .profile span {
   font-weight: 500;
   margin-top: 10px;
+  margin-bottom: -10px;
 }
 
 footer {
@@ -90,7 +95,9 @@ footer {
   font-weight: 400;
   color: #fff;
 }
-
+.nav-item dropdown{
+  overflow: visible !important;
+}
 
 .content {
   height: 100%;
@@ -124,6 +131,7 @@ footer {
 }
 .cards * {
   box-sizing: border-box;
+  border-color: white;
 }
 .cards {
   margin: 0 auto;
@@ -134,15 +142,16 @@ footer {
   gap: 20px;
   font-family: sans-serif;
   padding-top: 30px;
+  
 }
 .card_image {
   width: 100%;
   height: 150px;
   object-fit: cover;
   display: block;
-  border-top: 2px solid white;
-  border-right: 2px solid white;
-  border-left: 2px solid white;
+  border-top: 2px  white;
+  border-right: 2px  white;
+  border-left: 2px  white;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
 }
@@ -165,10 +174,9 @@ footer {
   font-size: 0.9em;
   padding: 15px;
   background: #fafafa;
-  border-right: 2px solid white;
-  border-left: 2px solid white;
   height: 120px;
   overflow: hidden;
+  
 }
 .card_info {
   padding: 15px;
@@ -181,8 +189,8 @@ footer {
   border-bottom: 2px solid white;
   border-right: 2px solid white;
   border-left: 2px solid white;
-  border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 dl, ol, ul {

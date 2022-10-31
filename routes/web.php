@@ -18,6 +18,9 @@ Route::get('/contato', function () {
     return view('contato');
 });
 
+Route::get('/cursoscadastro', function () {
+    return view('cadastrar_cursos');
+});
 Route::get('/', 'CursoController@index');
 
 Route::post('/pesquisar-curso', 'CursoController@pesquisar_curso')->name('pesquisar-curso');
@@ -31,3 +34,22 @@ Route::get('/cadastro/cursos', 'CursoController@cadastro');
 Route::post('/cadastro/cursos/salvar', 'CursoController@salvar_curso')->name('salvar_curso');
 
 Route::post('/comentar', 'AulaController@comentar')->name('comentar');
+
+Route::get('/login', 'UserController@login');
+Route::post('/auth', 'UserController@auth')->name('auth');
+
+Route::get('/cadastro/user', 'UserController@cadastro_user');
+Route::post('/cadastro/user/salvar', 'UserController@salvar_user')->name('salvar_user');
+
+//Cadastro modulos
+Route::get('/cadastro/modulos', 'CursoController@cadastro_modulos');
+Route::post('/cadastro/modulos/salvar', 'CursoController@salvar_modulo')->name('salvar_modulo');
+
+//Cadastro aulas
+Route::get('/cadastro/aulas', 'CursoController@cadastro_aulas');
+Route::post('/cadastro/aulas/salvar', 'CursoController@salvar_aula')->name('salvar_aula');
+
+Route::get('/logout',function(){
+    Auth::logout();
+    return view('login');
+});
