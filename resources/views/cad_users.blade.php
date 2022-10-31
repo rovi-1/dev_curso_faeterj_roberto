@@ -76,7 +76,7 @@
             <label for="inputUF">UF</label>
             <input type="text" name="uf" class="form-control" id="inputUF">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="inputBairro">Bairro</label>
             <input type="text" name="bairro" class="form-control" id="inputBairro">
         </div>
