@@ -13,14 +13,24 @@
 
             @csrf
             <div class="form-row">
+            <div class="form-group col-md-12">
+                <label class="details">Selecione o curso</label><br>
+                <select name="cursos_id" id="cursos_id" class="form-control" required>
+  
+                    <option value="" class="form-control">Selecione...</option>
+                    @foreach($cursos as $curso)
+                        <option value="{{$curso->id}}">{{$curso->nome}}</option>
+                    @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
             <div class="form-group col-md-6">
                 <label class="details">Selecione o modulo</label><br>
-                <select name="modulos_id" class="form-control" required>
+                <select name="modulos_id" id="modulos_id" class="form-control" required>
 
-                    <option class="form-control"value="">Selecione...</option>
-                    @foreach($modulos as $modulo)
-                        <option value="{{$modulo->id}}">{{$modulo->nome}}</option>
-                    @endforeach
+                    <option class="form-control"value=""></option>
+                  
                 </select>
             </div> 
             <div class="form-group col-md-6">
@@ -49,6 +59,28 @@
       </form>
       
   </div>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script>
+       $(document).ready(function () {
+            $('#cursos_id').on('change', function () {
+                var cursosid = this.value;
+                $('#modulos_id').html('');
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('GetModule') }}?cursos_id='+cursosid,
+                    success: function (res) {
+                        $('#modulos_id').html('<option value="">Selecione o modulo</option>');
+                        $.each(res, function (key, value) {
+                            $('#modulos_id').append('<option value="' + value.id + '">' + value.nome + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+</script>
 </body>
 @endsection('conteudo')
 @include('layouts.partials.menu')

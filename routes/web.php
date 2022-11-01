@@ -49,6 +49,8 @@ Route::post('/cadastro/modulos/salvar', 'CursoController@salvar_modulo')->name('
 Route::get('/cadastro/aulas', 'CursoController@cadastro_aulas');
 Route::post('/cadastro/aulas/salvar', 'CursoController@salvar_aula')->name('salvar_aula');
 
+Route::get('GetModule', 'CursoController@preencherSub')->name('GetModule');
+
 Route::get('/logout',function(){
     Auth::logout();
     return view('login');

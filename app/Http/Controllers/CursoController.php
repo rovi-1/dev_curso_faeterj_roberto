@@ -7,6 +7,7 @@ use App\Aula;
 use App\Modulo;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class CursoController extends Controller
@@ -25,8 +26,9 @@ class CursoController extends Controller
 
     public function show_cursos($id) { 
         $curso = Curso::where('id', '=', $id)->get();
-        $aula = Aula::where('modulos_id', '=', '1')
-                ->where('cursos.id', '=', $id)
+        $modulo = Modulo::where('cursos_id', '=', $id)->first()->id;
+        $aula = Aula::where('cursos.id', '=', $id)
+                ->where('modulos_id', '=', $modulo)
                 ->join('modulos', 'modulos.id', '=', 'aulas.modulos_id')
                 ->join('cursos', 'cursos.id', '=', 'modulos.cursos_id')
                 ->select('aulas.*')
@@ -50,11 +52,11 @@ class CursoController extends Controller
          return view('cad_cursos', compact('professores'));
     }
     private function _cursos() {
-        return Curso::get();
+        return Curso::where('professor_id', '=', Auth::user()->id)->get();
     }
     
-    private function _modulos() {
-        return Modulo::get();
+    private function _modulos($id) {
+        return Modulo::where('cursos_id', '=', $id)->get();
     }
 
     public function cadastro_modulos(){
@@ -66,12 +68,20 @@ class CursoController extends Controller
         return redirect('/cadastro/modulos')->with('success', 'Seu modulo foi criado com sucesso.');
    }
     public function cadastro_aulas(){
-        $modulos = $this->_modulos();
-        return view('cad_aulas', compact('modulos'));
+        $cursos = $this->_cursos();
+        return view('cad_aulas', compact('cursos'));
     }
     public function salvar_aula(Request $request) {
         Aula::create($request->all());
         return redirect('/cadastro/aulas')->with('success', 'Sua aula foi criada com sucesso.');
+    }
+ 
+    public function preencherSub(Request $request){
+        $modulo = Modulo::where('cursos_id', '=', $request->cursos_id)->get();
+        
+    if (count($modulo) > 0) {
+        return response()->json($modulo);
+    }
     }
 
 }

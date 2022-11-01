@@ -9,7 +9,6 @@
                 <h4 class="course_title">{{$curso[0]->nome}}</h4>
 
                 @foreach($curso as $cursos_detalhe)
-        
                     <!-- Módulo -->
                     @foreach($cursos_detalhe->modulos_exibir as $modulos)
                         <div class="module">
@@ -17,7 +16,7 @@
                             <ul class="module_list">
                             <!-- Aulas-->
                                 @foreach($modulos->aulas_exibir as $aulas)
-                                <li><a href="#">{{ $aulas->nome }}</a></li>
+                                <li><a href="/aulas/{{ $aulas->id }}">{{ $aulas->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -31,7 +30,7 @@
                 @if(!empty($aula))
                 <div class="content">
                     <input type="hidden" id="aula_id" value="{{$aula->id}}"/>
-                    <h2>{{ $aula->nome }}</h2>
+                    <h2>{{ $aula->name }}</h2>
                     <div id="video_youtube">
                         <iframe width="800" height="500"
                             src="https://www.youtube.com/embed/{{ $aula->video }}">
@@ -99,7 +98,8 @@
 
 function montarCard(res) {
      $('#montarCard').html(`<div class='card'>
-        <h6 class='card-header'>${res.created_at} - teste@teste.com.br</h6>
+        <h6 class='card-header'>${res.created_at} - ${res.aluno_id}</h6>
+       
         <div class='card-body'>
             <p class='card-text'>${res.descricao}</p></div>
         </div>`); 
