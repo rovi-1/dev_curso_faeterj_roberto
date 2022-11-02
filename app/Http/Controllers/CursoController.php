@@ -83,6 +83,6 @@ class CursoController extends Controller
         return response()->json($modulo);
     }
     }
-
+    
 }
 

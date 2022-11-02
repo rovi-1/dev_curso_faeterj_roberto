@@ -48,7 +48,7 @@
                     </div>
   
                     <div id="montarCard">
-
+                        
                     </div>
                      
                     
@@ -98,7 +98,7 @@
 
 function montarCard(res) {
      $('#montarCard').html(`<div class='card'>
-        <h6 class='card-header'>${res.created_at} - ${res.aluno_id}</h6>
+        <h6 class='card-header'>${res.created_at} - {{Auth::user()->email}} </h6>
        
         <div class='card-body'>
             <p class='card-text'>${res.descricao}</p></div>

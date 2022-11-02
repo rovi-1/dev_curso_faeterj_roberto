@@ -49,4 +49,5 @@ class UserController extends Controller
         ]);
         return redirect('/cadastro/user')->with('success', 'Sua conta foi criada com sucesso.');
     }
+
 }
